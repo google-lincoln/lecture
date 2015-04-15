@@ -1,4 +1,6 @@
 #include <iostream>
+#include "Lesson07.h"
+
 
 
 using namespace std;
@@ -7,6 +9,7 @@ using namespace std;
 int main()
 {
 
-	cout<<"hello world"<<endl;
+	/*Lesson7 begin here*/
+	exchange_rate();
 	return 0;
 }

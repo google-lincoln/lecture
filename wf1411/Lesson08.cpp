@@ -122,6 +122,14 @@ static int callBack(void*data,int ncols,char**values,char**headers)
 }
 
 
+int login(void *pData,int ncols,char** values,char** headers)
+{
+	(*(bool*)pData) = true;
+	return 0;
+}
+
+
+
 void get_table()
 {
 	sqlite3* db;
@@ -154,6 +162,69 @@ void get_table()
 		printf("\n");
 	}
 
+	sqlite3_free_table(pResult);
+	
+}
 
+
+DBConn *DBConn::pConn = NULL;
+Garbo Garbo::garbo;
+
+DBConn::DBConn()
+{
+	/*Open database connection*/
+	int rc;
+	rc = sqlite3_open("test.db",&db);
+	if(rc!=SQLITE_OK)
+	{
+		exit(1);
+	}
+	else
+	{
+		printf("Open database connection successfully!\n");
+	}
+	
+}
+
+DBConn::~DBConn()
+{
+	/*Close daatabase connection*/
+	sqlite3_close(db);
+	printf("Close database connection successfully!\n");
+}
+
+DBConn* DBConn::getInstance()
+{
+	if(pConn==NULL)
+	{
+		pConn = new DBConn();
+	}
+	return pConn;
+}
+
+Garbo::Garbo()
+{
 
 }
+
+Garbo::~Garbo()
+{
+	if(DBConn::pConn!=NULL)
+	{
+		delete DBConn::pConn;
+	}
+}
+
+int DBConn::getData(char* sql,sqlite3_callback pFun,void *pData)
+{
+
+	char* zErr;
+	int rc;
+	rc = sqlite3_exec(db,sql,pFun,pData,&zErr);
+	if(rc!=SQLITE_OK)
+	{
+		printf("SQL Error:%s\n",zErr);
+	}
+	return 1;
+}
+

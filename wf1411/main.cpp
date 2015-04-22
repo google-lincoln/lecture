@@ -23,6 +23,7 @@ int main()
 
 	//open_database();
 	//create_table();
-	callback_test();
+	//callback_test();
+	get_table();
 	return 0;
 }

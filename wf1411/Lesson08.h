@@ -4,9 +4,9 @@
 void open_database();
 void create_table();
 
-//static int callBack(void* data,int ncols,char**values,char**headers);
+static int callBack(void* data,int ncols,char**values,char**headers);
 void callback_test();
 
-
+void get_table();
 
 #endif

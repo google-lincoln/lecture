@@ -71,19 +71,7 @@ void create_table()
 
 
 
- static int callBack(void*data,int ncols,char**values,char**headers)
-{
-	int i;
-	fprintf(stderr,"%s:",(const char*)data);
 
-	for(i=0;i<ncols;i++)
-	{
-		fprintf(stderr,"%s=%s",headers[i],values[i]);
-	}
-	fprintf(stderr,"\n");
-
-	return 0;
-}
 
 void callback_test()
 {
@@ -117,4 +105,55 @@ void callback_test()
 	}
 
 	sqlite3_close(db);
+}
+
+static int callBack(void*data,int ncols,char**values,char**headers)
+{
+	int i;
+	fprintf(stderr,"%s:",(const char*)data);
+
+	for(i=0;i<ncols;i++)
+	{
+		fprintf(stderr,"%s=%s",headers[i],values[i]);
+	}
+	fprintf(stderr,"\n");
+
+	return 0;
+}
+
+
+void get_table()
+{
+	sqlite3* db;
+	int rc;
+	char* sql;
+	char* zErr;
+	char** pResult;
+	int cols,rows;
+	
+	sql = "select * from episodes";
+
+	rc = sqlite3_open("test.db",&db);
+
+	if(rc)
+	{
+		fprintf(stderr,"Can't open database: %s\n",sqlite3_errmsg(db));
+		sqlite3_close(db);
+		exit(1);
+	}
+
+	sqlite3_get_table(db,sql,&pResult,&rows,&cols,&zErr);
+
+	for(int row=0;row<rows;row++)
+	{
+		for(int col=0;col<cols;col++)
+		{
+			printf("%s:=%s\n",pResult[col],pResult[(row+1)*cols+col]);
+		
+		}
+		printf("\n");
+	}
+
+
+
 }

@@ -174,7 +174,7 @@ DBConn::DBConn()
 {
 	/*Open database connection*/
 	int rc;
-	rc = sqlite3_open("test.db",&db);
+	rc = sqlite3_open("student.db",&db);
 	if(rc!=SQLITE_OK)
 	{
 		exit(1);

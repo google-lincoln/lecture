@@ -39,7 +39,7 @@ int main()
 	printf("ÇëÊäÈëÃÜÂë:");
 	scanf("%s",password);
 
-	sprintf(sql,"select * from student where studentName =%s and age =%s",name,password);
+	sprintf(sql,"select * from student where studentName ='%s' and age =%s ",name,password);
 
 	dbConn->getData(sql,login,&loginFlag);
 

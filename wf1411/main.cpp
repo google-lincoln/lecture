@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Lesson07.h"
+#include "Lesson08.h"
 
 
 
@@ -18,6 +19,10 @@ int main()
 //	auto_increment();
 //	string_test();
 //	friend_stock_print();
-	tatal_print();
+	//tatal_print();
+
+	//open_database();
+	//create_table();
+	callback_test();
 	return 0;
 }

@@ -5,7 +5,10 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    connect_database();
-
+    //connect_database();
+    //create_table();
+    ///insert_data();
+    //select_data();
+    update_data();
     return a.exec();
 }
